@@ -55,6 +55,8 @@ class CustomUsuario(AbstractUser):
 
 
     class Meta:
+        verbose_name = 'Usuário'
+        verbose_name_plural = 'Usuários'
         ordering = ['first_name', 'last_name']
 
     objects = UsuarioMaganer()
