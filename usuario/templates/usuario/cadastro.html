@@ -1,0 +1,49 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+{% block form %}
+<form method="POST" class="">
+    {% csrf_token %}
+    <h1 class="">Criar uma conta</h1>
+    <p class="lead">Já tem conta? <strong><a href="{% url 'login' %}" class="">Faça login</a></strong></p>
+    <div class="row g-2">
+        <div class="col">
+            <input required name="first_name" class="form-control mb-2" type="text" placeholder="Nome">
+        </div>
+        <div class="col">
+            <input required name="last_name" class="form-control mb-2" type="text" placeholder="Sobrenome">
+        </div>
+    </div>
+    <input required name="username" class="form-control mb-2" type="text" placeholder="username">
+    {% if form.errors.username %}
+    {% for error in form.errors.username %}
+    <small class="text-danger ms-3">{{ error }}</small><br/>
+    {% endfor %}
+    {% endif %}
+    <input required name="email" class="form-control mb-2" type="email" placeholder="e-mail">
+    {% if form.errors.email %}
+    {% for error in form.errors.email %}
+    <small class="text-danger ms-3">{{ error }}</small><br/>
+    {% endfor %}
+    {% endif %}
+    <input required name="password1" class="form-control mt-2 mb-2" type="password" placeholder="Senha">
+    {% if form.errors.password1 %}
+    {% for error in form.errors.password1 %}
+    <small class="text-danger ms-3">{{ error }}</small><br/>
+    {% endfor %}
+    {% endif %}
+    <small class="text-muted">{{form.password1.help_text}}</small>
+    <input required name="password2" class="form-control" type="password" placeholder="Confirmar senha">
+    {% if form.errors.password2 %}
+    {% for error in form.errors.password2 %}
+    <small class="text-danger ms-3">{{ error }}</small><br/>
+    {% endfor %}
+    {% endif %}
+    <small class="text-muted ms-3">{{form.password2.help_text}}</small>
+    <div class="d-grid mb-1 mt-2">
+        <button type="submit" class="btn btn-dark">Cadastrar</button>
+    </div>
+</form>
+{% endblock %}
+{% block image %}
+imagem
+{% endblock %}

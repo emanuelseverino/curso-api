@@ -1,0 +1,24 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+{% block form %}
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <h1 class="">Entrar</h1>
+    <p class="lead">Não tem conta? <strong><a href="{% url 'cadastro-usuario' %}" class="">Crie uma agora</a></strong>
+    </p>
+    <input required name="username" class="form-control mb-2" type="email" placeholder="e-mail">
+    <input required name="password" class="form-control mb-2" type="password" placeholder="senha">
+    {% if form.errors %}
+    <div class="alert alert-danger" role="alert">
+        E-mail ou senha, são inválidos.
+    </div>
+    {% endif %}
+    <div class="d-grid mb-1">
+        <button type="submit" class="btn btn-dark">Entrar</button>
+    </div>
+    <p class="text-center"><strong><a href="{% url 'password_reset' %}">Esqueceu a senha?</a></strong></p>
+</form>
+{% endblock %}
+{% block image %}
+imagem
+{% endblock %}
