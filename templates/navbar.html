@@ -19,6 +19,10 @@
 
         <div class="col-md-3 text-end">
             {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+
+            {% endif %}
+            <a href="{% url 'admin' %}" type="button" class="btn btn-dark">Administração</a>
             <a href="{% url 'logout' %}" type="button" class="btn btn-outline-dark">Sair</a>
             {% else %}
             <a href="{% url 'login' %}" type="button" class="btn btn-outline-dark me-2">Entrar</a>
