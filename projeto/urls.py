@@ -6,6 +6,7 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework.permissions import AllowAny
 
+from core.views import robots
 from usuario.api.viewsets import CustomAuthToken, ChangePasswordView
 
 schema_view = get_schema_view(
@@ -31,6 +32,7 @@ urlpatterns = [
     path('usuario/', include('usuario.urls'), ),
     path('perfil/', include('perfil.urls'), ),
     path('contas/', include("django.contrib.auth.urls")),
+    path('robots.txt', robots, ),
 ]
 
 urlpatterns += [
