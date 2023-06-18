@@ -1,0 +1,8 @@
+// Importe o Bootstrap
+@import 'static/bootstrap/bootstrap.min.css';
+
+// Sobrescreva as variáveis do Bootstrap
+$primary: #000000; // Defina sua cor primária personalizada
+
+// Compile o Bootstrap e seu arquivo personalizado
+@import 'static/bootstrap/bootstrap.min.css';
