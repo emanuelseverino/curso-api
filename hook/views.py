@@ -111,22 +111,6 @@ class WebHookView(View):
             data='123'
         )
         mercado_page_test.save()
-
-        payload = self.request.POST
-        if (payload):
-            mercado_page_obj = MercadoPago(
-                action=payload.get('action'),
-                api_version=payload.get('api_version'),
-                application_id=payload.get('application_id'),
-                date_created=payload.get('date_created'),
-                id_web=payload.get('id'),
-                live_mode=payload.get('live_mode'),
-                type=payload.get('type'),
-                user_id=payload.get('user_id'),
-                data='123'
-            )
-            mercado_page_obj.save()
-            return HttpResponse(status=200)
         return HttpResponse(status=200)
 
 
