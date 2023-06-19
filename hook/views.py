@@ -19,7 +19,7 @@ class PagarView(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         data = {
-            "transaction_amount": 1,
+            "transaction_amount": 2,
             "description": "Compra API",
             "payment_method_id": "pix",
             "payer": {
@@ -93,7 +93,8 @@ class PagarView(LoginRequiredMixin, View):
 class WebHookView(View):
 
     def post(self, request, *args, **kwargs):
-        Teste.create(mensagem=self.request.str)
+        teste = Teste.create(mensagem=self.request.str)
+        teste.save()
         payload = self.request.get_json()
         converted_data = {}
         for key, value in payload.items():
