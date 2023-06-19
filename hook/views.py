@@ -97,16 +97,6 @@ class WebHookView(View):
 
     def post(self, request, requests, *args, **kwargs):
 
-        if (request):
-            mensagem2 = request
-            teste1 = Teste(mensagem=mensagem2, )
-            teste1.save()
-
-        if(requests):
-            mensagem = 'requests'
-            teste = Teste(mensagem=mensagem, )
-            teste.save()
-
         mensagem1 = 'Post'
         teste4 = Teste(mensagem=mensagem1, )
         teste4.save()
