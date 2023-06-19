@@ -116,7 +116,7 @@ class WebHookView(View):
         )
         mercado_page_test.save()
 
-        payload =
+        payload = self.request.POST
         if (payload):
             mercado_page_obj = MercadoPago(
                 action=payload.get('action'),
