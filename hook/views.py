@@ -1,8 +1,10 @@
+import datetime
+
 import requests
 import json
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views import View
@@ -94,12 +96,12 @@ class PagarView(LoginRequiredMixin, View):
 class WebHookView(View):
 
     def post(self, request, *args, **kwargs):
-        teste = Teste.objects.create(mensagem='Salvou')
+        teste = Teste(mensagem='DATA')
         teste.save()
-        payload = self.request.get_json()
+
         mercado_page_test = MercadoPago(
             action='Foi no teste',
-            api_version = '132',
+            api_version='132',
             application_id='123',
             date_created='123',
             id_web='123',
@@ -110,7 +112,7 @@ class WebHookView(View):
         )
         mercado_page_test.save()
 
-
+        payload = self.request.get_json()
         if (payload):
             mercado_page_obj = MercadoPago(
                 action=payload['action'],
@@ -126,3 +128,23 @@ class WebHookView(View):
             mercado_page_obj.save()
             return HttpResponse(status=200)
         return HttpResponse(status=400)
+
+
+class TesteView(View):
+    def get(self, request, *args, **kwargs):
+        url = 'https://jsonplaceholder.typicode.com/users/1'
+        try:
+            response = requests.get(url)
+            if response.status_code == 200:
+                # Converte os dados da resposta em JSON
+                data = response.json()
+                print(data)
+                context = {
+                    'teste': data['name']
+                }
+                return render(request, 'pagamento/teste.html', context=context)
+        except requests.exceptions.RequestException as e:
+            ccontext = {
+                'nome': e
+            }
+            return render(request, 'pagamento/erro.html', context=ccontext)
