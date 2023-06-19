@@ -19,7 +19,7 @@ class PagarView(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         data = {
-            "transaction_amount": 101,
+            "transaction_amount": 3,
             "description": "Compra API2",
             "payment_method_id": "pix",
             "payer": {
