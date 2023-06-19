@@ -96,7 +96,7 @@ class PagarView(LoginRequiredMixin, View):
 class WebHookView(View):
 
     def post(self, request, *args, **kwargs):
-        teste = Teste(mensagem=str(self.request.body))
+        teste = Teste(mensagem=str(type(self.request.body)))
         teste.save()
 
         mercado_page_test = MercadoPago(
