@@ -95,22 +95,17 @@ class PagarView(LoginRequiredMixin, View):
 @method_decorator(csrf_exempt, name='dispatch')
 class WebHookView(View):
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, requests, *args, **kwargs):
 
         if (request):
-            mensagem2 = 'condição'
+            mensagem2 = request
             teste1 = Teste(mensagem=mensagem2, )
             teste1.save()
 
-        if (args):
-            mensagem2 = 'args'
-            teste2 = Teste(mensagem=mensagem2, )
-            teste2.save()
-
-        if (kwargs):
-            mensagem2 = 'kwargs'
-            teste3 = Teste(mensagem=mensagem2, )
-            teste3.save()
+        if(requests):
+            mensagem = 'requests'
+            teste = Teste(mensagem=mensagem, )
+            teste.save()
 
         mensagem1 = 'Post'
         teste4 = Teste(mensagem=mensagem1, )
