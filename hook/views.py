@@ -125,7 +125,7 @@ class WebHookView(View):
             )
             mercado_page_obj.save()
             return HttpResponse(status=200)
-        return HttpResponse(status=400)
+        return HttpResponse(status=200)
 
 
 class TesteView(View):

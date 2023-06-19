@@ -35,7 +35,7 @@ urlpatterns = [
     path('hook/', include('hook.urls'), ),
     path('contas/', include("django.contrib.auth.urls")),
     path('robots.txt', robots, ),
-    path('webhook/', WebHookView.as_view(), name='webhook', ),
+    path('webhook2/', WebHookView.as_view(), name='webhook', ),
 ]
 
 urlpatterns += [
