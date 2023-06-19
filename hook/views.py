@@ -49,13 +49,14 @@ class PagarView(LoginRequiredMixin, View):
         data = json.loads(response.content)
 
         if response.status_code == 201:
-            cob = Cobranca.objects.create(pagamento_id=data['id'], status=data['status'], status_detalhe=data['status_detail'],
-                                 criado_em=data['date_created'], atualizado_em=data['status'],
-                                 pago_em=data['date_approved'],
-                                 descricao=data['description'],
-                                 qr_code=data['point_of_interaction']['transaction_data']['qr_code'],
-                                 qr_code64=data['point_of_interaction']['transaction_data']['qr_code_base64'],
-                                 url=data['point_of_interaction']['transaction_data']['ticket_url'])
+            cob = Cobranca.objects.create(pagamento_id=data['id'], status=data['status'],
+                                          status_detalhe=data['status_detail'],
+                                          criado_em=data['date_created'], atualizado_em=data['status'],
+                                          pago_em=data['date_approved'],
+                                          descricao=data['description'],
+                                          qr_code=data['point_of_interaction']['transaction_data']['qr_code'],
+                                          qr_code64=data['point_of_interaction']['transaction_data']['qr_code_base64'],
+                                          url=data['point_of_interaction']['transaction_data']['ticket_url'])
             if cob:
                 cob.save()
                 obj_cobranca = Cobranca.objects.get(id=cob.pk)
@@ -96,12 +97,17 @@ class WebHookView(View):
         teste = Teste.objects.create(mensagem='Salvou')
         teste.save()
         payload = self.request.get_json()
-        converted_data = {}
-        for key, value in payload.items():
-            converted_data[key] = str(value)
         if (payload):
-            mercado_page = MercadoPago.objects.create(**converted_data)
-            mercado_page.id_web = converted_data['id']
+            mercado_page = MercadoPago.objects.create(
+                action=payload['action'],
+                application_id=payload['application_id'],
+                date_created=payload['date_created'],
+                id_web=payload['id'],
+                live_mode=payload['live_mode'],
+                type=payload['type'],
+                user_id=payload['user_id'],
+                data=payload['data']['id']
+            )
             mercado_page.save()
             return HttpResponse(status=200)
         return HttpResponse(status=400)
