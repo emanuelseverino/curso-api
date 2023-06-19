@@ -96,7 +96,8 @@ class PagarView(LoginRequiredMixin, View):
 class WebHookView(View):
 
     def post(self, request, *args, **kwargs):
-        mensagem1 = f'{0}'.format(self.request.POST.dict())
+
+        mensagem1 = 'Post: %s' % self.post().get()
         mensagem2 = 'teste'
 
         teste1 = Teste(mensagem=mensagem1, )
