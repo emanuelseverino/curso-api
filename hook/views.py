@@ -97,8 +97,8 @@ class WebHookView(View):
 
     def post(self, request, *args, **kwargs):
 
-        mensagem1 = '%' % self.request
-        mensagem2 = '%' % request
+        mensagem1 = f'{0}'.format(self.request.POST)
+        mensagem2 = f'{0}'.format(request)
 
         teste1 = Teste(mensagem=mensagem1, )
         teste2 = Teste(mensagem=mensagem2, )
