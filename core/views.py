@@ -33,18 +33,3 @@ def robots(request):
         path = os.path.join(settings.BASE_DIR, 'statics/robots.txt')
     with open(path, 'r') as arq:
         return HttpResponse(arq, content_type="text/plain")
-
-
-@method_decorator(csrf_exempt, name='dispatch')
-class WebHookView(View):
-    # @method_decorator(csrf_exempt, name='dispatch')
-    # def dispatch(self, request, *args, **kwargs):
-    #     return super(WebHookView, self).dispatch(request, *args, **kwargs)  # for python 2
-    #     return super().dispatch(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        payload = self.request
-        if (payload):
-            print(request.POST.get('teste'))
-            return HttpResponse(status=200)
-        return HttpResponse(status=400)

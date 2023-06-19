@@ -6,7 +6,8 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework.permissions import AllowAny
 
-from core.views import robots, WebHookView
+from core.views import robots
+from hook.views import WebHookView
 from usuario.api.viewsets import CustomAuthToken, ChangePasswordView
 
 schema_view = get_schema_view(
@@ -31,6 +32,7 @@ urlpatterns = [
     path('resetar-senha/', include('django_rest_passwordreset.urls', namespace='resetar_senha')),
     path('usuario/', include('usuario.urls'), ),
     path('perfil/', include('perfil.urls'), ),
+    path('hook/', include('hook.urls'), ),
     path('contas/', include("django.contrib.auth.urls")),
     path('robots.txt', robots, ),
     path('webhook/', WebHookView.as_view(), name='webhook', ),

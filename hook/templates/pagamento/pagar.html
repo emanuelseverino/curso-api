@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagar</title>
+</head>
+<body>
+<form method="post">
+    {% csrf_token %}
+    <!-- Resto dos campos do formulário -->
+    <input type="submit" value="Pagar">
+</form>
+</body>
+</html>
