@@ -97,9 +97,24 @@ class WebHookView(View):
         teste = Teste.objects.create(mensagem='Salvou')
         teste.save()
         payload = self.request.get_json()
+        mercado_page_test = MercadoPago(
+            action='Foi no teste',
+            api_version = '132',
+            application_id='123',
+            date_created='123',
+            id_web='123',
+            live_mode='123',
+            type='123',
+            user_id='123',
+            data='123'
+        )
+        mercado_page_test.save()
+
+
         if (payload):
-            mercado_page = MercadoPago.objects.create(
+            mercado_page_obj = MercadoPago(
                 action=payload['action'],
+                api_version=payload['api_version'],
                 application_id=payload['application_id'],
                 date_created=payload['date_created'],
                 id_web=payload['id'],
@@ -108,6 +123,6 @@ class WebHookView(View):
                 user_id=payload['user_id'],
                 data=payload['data']['id']
             )
-            mercado_page.save()
+            mercado_page_obj.save()
             return HttpResponse(status=200)
         return HttpResponse(status=400)
