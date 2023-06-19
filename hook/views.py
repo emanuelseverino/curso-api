@@ -93,7 +93,7 @@ class PagarView(LoginRequiredMixin, View):
 class WebHookView(View):
 
     def post(self, request, *args, **kwargs):
-        teste = Teste.create(mensagem=self.request.str)
+        teste = Teste.objects.create(mensagem='Salvou')
         teste.save()
         payload = self.request.get_json()
         converted_data = {}
