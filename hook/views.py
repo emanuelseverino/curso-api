@@ -97,7 +97,7 @@ class WebHookView(View):
 
     def post(self, request, *args, **kwargs):
         teste1 = Teste(mensagem='1 Teste')
-        teste2 = Teste(mensagem='2 %s' % request)
+        teste2 = Teste(mensagem='2 %s' % self.request.POST)
         teste1.save()
         teste2.save()
 
