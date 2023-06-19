@@ -61,7 +61,6 @@ class PagarView(LoginRequiredMixin, View):
                 _cobranca.save()
                 obj_cobranca = Cobranca.objects.get(id=_cobranca.pk)
                 pagamento = Pagamento(usuario=self.request.user, pagamento=obj_cobranca, status=_cobranca.status)
-                _cobranca.save()
                 if pagamento:
                     context = {
                         'pagamento': pagamento.pagamento
