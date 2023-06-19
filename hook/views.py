@@ -49,7 +49,7 @@ class PagarView(LoginRequiredMixin, View):
         data = json.loads(response.content)
 
         if response.status_code == 201:
-            _cobranca = Cobranca.create(pagamento_id=data['id'], status=data['status'], status_detalhe=data['status_detail'],
+            _cobranca = Cobranca.objects.create(pagamento_id=data['id'], status=data['status'], status_detalhe=data['status_detail'],
                                  criado_em=data['date_created'], atualizado_em=data['status'],
                                  pago_em=data['date_approved'],
                                  descricao=data['description'],
