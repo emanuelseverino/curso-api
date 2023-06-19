@@ -12,6 +12,7 @@ from hook.models import Cobranca, Pagamento, MercadoPago, Teste
 
 
 class PagarView(LoginRequiredMixin, View):
+    login_url = 'contas/login'
 
     def get(self, request, *args, **kwargs):
         return render(request, 'pagamento/pagar.html')
