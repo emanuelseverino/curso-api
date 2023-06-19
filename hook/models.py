@@ -38,7 +38,7 @@ class MercadoPago(models.Model):
     data = models.CharField(max_length=30)
 
     def __str__(self):
-        return self.id_web
+        return '%s - %s' % (self.pk, self.id_web)
 
 
 class Teste(models.Model):
@@ -46,7 +46,7 @@ class Teste(models.Model):
     criado_em = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
     def __str__(self):
-        return '%s' % self.criado_em
+        return '%s - %s' % (self.pk, self.mensagem)
 
 
 class Pagamento(models.Model):
