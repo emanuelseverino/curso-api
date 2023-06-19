@@ -18,8 +18,8 @@ class Cobranca(models.Model):
     atualizado_em = models.CharField(max_length=30)
     pago_em = models.CharField(max_length=30, null=True, blank=True)
     descricao = models.CharField(max_length=30)
-    qr_code = models.CharField(max_length=1000)
-    qr_code64 = models.CharField(max_length=1000)
+    qr_code = models.CharField(max_length=10000)
+    qr_code64 = models.CharField(max_length=6000)
     url = models.CharField(max_length=200)
 
     def __str__(self):

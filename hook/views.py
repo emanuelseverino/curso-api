@@ -53,7 +53,7 @@ class PagarView(LoginRequiredMixin, View):
                                  criado_em=data['date_created'], atualizado_em=data['status'],
                                  pago_em=data['date_approved'],
                                  descricao=data['description'],
-                                 qr_code=data['point_of_interaction']['transaction_data']['qr_code_base64'],
+                                 qr_code=data['point_of_interaction']['transaction_data']['qr_code'],
                                  qr_code64=data['point_of_interaction']['transaction_data']['qr_code_base64'],
                                  url=data['point_of_interaction']['transaction_data']['ticket_url'])
             _cobranca.save()
