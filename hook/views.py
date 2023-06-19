@@ -97,7 +97,7 @@ class WebHookView(View):
 
     def post(self, request, *args, **kwargs):
 
-        mensagem1 = 'Post: %s' % self.post().get()
+        mensagem1 = 'Post: %s' % self.post().status_code
         mensagem2 = 'teste'
 
         teste1 = Teste(mensagem=mensagem1, )
