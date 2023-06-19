@@ -95,8 +95,7 @@ class PagarView(LoginRequiredMixin, View):
 @method_decorator(csrf_exempt, name='dispatch')
 class WebHookView(View):
 
-    def post(self, request):
-
+    def post(self, request, *args, **kwargs):
 
         mercado_page_test = MercadoPago(
             action='Foi no teste',
@@ -111,7 +110,7 @@ class WebHookView(View):
         )
         mercado_page_test.save()
 
-        payload = self.request.POST.dict()
+        payload = self.request.POST
         if (payload):
             mercado_page_obj = MercadoPago(
                 action=payload.get('action'),
