@@ -1,9 +1,8 @@
-from datetime import datetime
+import datetime
 
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.utils import timezone
 
 
 class UsuarioMaganer(BaseUserManager):
@@ -40,7 +39,7 @@ class CustomUsuario(AbstractUser):
     foto = models.ImageField(upload_to='usuarios', blank=True, null=True)
     email = models.EmailField('e-mail', unique=True)
     celular = models.CharField('celular', max_length=17, unique=True, blank=True, null=True)
-    vencimento = models.DateTimeField()
+    vencimento = models.DateTimeField(default=datetime.datetime.now)
     visivel = models.BooleanField(default=True)
 
     USERNAME_FIELD = 'email'
@@ -48,10 +47,6 @@ class CustomUsuario(AbstractUser):
 
     def __str__(self):
         return self.email
-
-    def save(self, *args, **kwargs):
-        self.vencimento = timezone.now()
-        super().save(*args, **kwargs)
 
 
     class Meta:

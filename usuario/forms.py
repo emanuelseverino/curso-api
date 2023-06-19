@@ -27,4 +27,4 @@ class CustomUsuarioCreateForm(UserCreationForm):
 class CustomUsuarioChangeForm(UserChangeForm):
     class Meta:
         model = CustomUsuario
-        fields = ('celular',)
+        fields = ('celular', 'vencimento')

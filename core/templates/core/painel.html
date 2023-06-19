@@ -2,7 +2,12 @@
 {% block content %}
 {% include 'navbar.html' %}
 <div class="container">
-  <h1>Bem vindo ao Painel de Controle</h1>
-  <p>{{ user.get_full_name }}</p>
+  <h1>Painel de Controle</h1>
+  <p>Olá, {{ user.get_full_name }}!</p>
+  {% if data_atual > data_vencimento %}
+  <p>O seu plano vencerá em <strong>{{ user.vencimento|date }}</strong>.</p>
+  {% else %}
+   <p>O seu plano venceu em <strong>{{ user.vencimento|date }}</strong>.</p>
+  {% endif %}
 </div>
 {% endblock %}
