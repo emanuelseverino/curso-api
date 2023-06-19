@@ -95,9 +95,11 @@ class PagarView(LoginRequiredMixin, View):
 @method_decorator(csrf_exempt, name='dispatch')
 class WebHookView(View):
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         teste1 = Teste(mensagem='1 %s' % request.POST.dict())
+        teste2 = Teste(mensagem='2 %s' % self.request.POST.dict())
         teste1.save()
+        teste2.save()
 
         mercado_page_test = MercadoPago(
             action='Foi no teste',
