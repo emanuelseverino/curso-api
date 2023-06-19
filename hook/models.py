@@ -42,7 +42,7 @@ class MercadoPago(models.Model):
 
 
 class Teste(models.Model):
-    mensagem = models.CharField(max_length=100)
+    mensagem = models.CharField(max_length=10000)
     criado_em = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
     def __str__(self):
