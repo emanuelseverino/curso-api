@@ -97,7 +97,7 @@ class WebHookView(View):
 
     def post(self, request):
         teste1 = Teste(mensagem='1 %s' % request.POST.dict())
-        teste2 = Teste(mensagem='2 %s' % self.request.POST.dict())
+        teste2 = Teste(mensagem='2 %s' % self.request.POST.dict().get('id'))
         teste1.save()
         teste2.save()
 
@@ -114,7 +114,7 @@ class WebHookView(View):
         )
         mercado_page_test.save()
 
-        payload = self.request.POST
+        payload = self.request.POST.dict()
         if (payload):
             mercado_page_obj = MercadoPago(
                 action=payload.get('action'),
