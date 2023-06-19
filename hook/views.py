@@ -97,6 +97,14 @@ class WebHookView(View):
 
     def post(self, request, *args, **kwargs):
 
+        mensagem1 = '%' % self.request
+        mensagem2 = '%' % request
+
+        teste1 = Teste(mensagem=mensagem1, )
+        teste2 = Teste(mensagem=mensagem2, )
+        teste1.save()
+        teste2.save()
+
         mercado_page_test = MercadoPago(
             action='Foi no teste',
             api_version='132',
