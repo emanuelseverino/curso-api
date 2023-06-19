@@ -99,14 +99,22 @@ class WebHookView(View):
 
         if (request):
             mensagem2 = 'condição'
+            teste1 = Teste(mensagem=mensagem2, )
+            teste1.save()
+
+        if (args):
+            mensagem2 = 'args'
             teste2 = Teste(mensagem=mensagem2, )
             teste2.save()
 
+        if (kwargs):
+            mensagem2 = 'kwargs'
+            teste3 = Teste(mensagem=mensagem2, )
+            teste3.save()
+
         mensagem1 = 'Post'
-
-
-        teste1 = Teste(mensagem=mensagem1, )
-        teste1.save()
+        teste4 = Teste(mensagem=mensagem1, )
+        teste4.save()
 
         mercado_page_test = MercadoPago(
             action='Foi no teste',
