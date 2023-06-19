@@ -56,6 +56,7 @@ class PagarView(LoginRequiredMixin, View):
                                  qr_code=data['point_of_interaction']['transaction_data']['qr_code_base64'],
                                  qr_code64=data['point_of_interaction']['transaction_data']['qr_code_base64'],
                                  url=data['point_of_interaction']['transaction_data']['ticket_url'])
+            _cobranca.save()
             if _cobranca:
                 obj_cobranca = Cobranca.objects.get(id=_cobranca.pk)
                 pagamento = Pagamento(usuario=self.request.user, pagamento=obj_cobranca, status=_cobranca.status)
