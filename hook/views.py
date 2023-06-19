@@ -97,7 +97,7 @@ class WebHookView(View):
 
     def post(self, request, *args, **kwargs):
 
-        if (self.post()):
+        if (self.request.POST):
             mensagem2 = 'condição'
             teste2 = Teste(mensagem=mensagem2, )
             teste2.save()
