@@ -10,18 +10,18 @@ STATUS_CHOICES = [
 ]
 
 
-class Cobranca(models.Model):
+class Pagamento(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    pagamento_id = models.CharField(max_length=30)
-    status = models.CharField(max_length=30)
-    status_detalhe = models.CharField(max_length=30)
-    criado_em = models.CharField(max_length=30)
-    atualizado_em = models.CharField(max_length=30)
+    pagamento_id = models.CharField(max_length=30, null=True, blank=True)
+    status = models.CharField(choices=STATUS_CHOICES, max_length=20)
+    status_detalhe = models.CharField(max_length=30, null=True, blank=True)
+    criado_em = models.CharField(max_length=30, null=True, blank=True)
+    atualizado_em = models.CharField(max_length=30, null=True, blank=True)
     pago_em = models.CharField(max_length=30, null=True, blank=True)
-    descricao = models.CharField(max_length=30)
-    qr_code = models.CharField(max_length=10000)
-    qr_code64 = models.CharField(max_length=6000)
-    url = models.CharField(max_length=200)
+    descricao = models.CharField(max_length=30, null=True, blank=True)
+    qr_code = models.CharField(max_length=10000, null=True, blank=True)
+    qr_code64 = models.CharField(max_length=6000, null=True, blank=True)
+    url = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
         return '%s - %s' % (self.usuario, self.pagamento_id)
@@ -50,10 +50,9 @@ class Teste(models.Model):
         return '%s - %s' % (self.pk, self.mensagem)
 
 
-class Pagamento(models.Model):
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    cobranca = models.ForeignKey(Cobranca, on_delete=models.CASCADE)
-    status = models.CharField(choices=STATUS_CHOICES, max_length=20)
+class Cobranca(models.Model):
+    id_web = models.CharField(max_length=50, null=True, blank=True)
+    mensagem = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
-        return '%s' % self.cobranca
+        return '%s - %s' % (self.id_web, self.mensagem)

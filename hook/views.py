@@ -104,19 +104,30 @@ class WebHookView(View):
         teste = Teste(mensagem=mensagem)
         teste.save()
 
-        # mercado_page_test = MercadoPago(
-        #     action=body['action'],
-        #     api_version=body['api_version'],
-        #     application_id=body['application_id'],
-        #     date_created=body['date_created'],
-        #     id_web=body['id'],
-        #     live_mode=body['live_mode'],
-        #     type=body['type'],
-        #     user_id=str(body['user_id']),
-        #     data='123'
-        # )
-        # mercado_page_test.save()
+        mercado_page_test = MercadoPago(
+            action=body['action'],
+            api_version=body['api_version'],
+            application_id=body['application_id'],
+            date_created=body['date_created'],
+            id_web=body['id'],
+            live_mode=body['live_mode'],
+            type=body['type'],
+            user_id=str(body['user_id']),
+            data='123'
+        )
+        mercado_page_test.save()
+
         return HttpResponse(status=200)
+
+    # def get(self):
+    #     body = json.loads(self.request.body.decode())
+    #     url = body['resource']
+    #     response = requests.get(url)
+    #     if response.status_code == 200:
+    #         # Converte os dados da resposta em JSON
+    #         data = response.json()
+    #         mercado = MercadoPago.objects.get(id_web=str(data['collection']['id']))
+    #     return HttpResponse(status=200)
 
 
 class TesteView(View):
@@ -137,3 +148,45 @@ class TesteView(View):
                 'nome': e
             }
             return render(request, 'pagamento/erro.html', context=ccontext)
+
+
+def lerWebook(url):
+    headers = {
+        'Authorization': 'Bearer APP_USR-7893702088637531-012618-cd9f06ef47c005273a3cd983a2ce2902-119438936'
+    }
+    try:
+        response = requests.get(url, headers=headers)
+        if response.status_code == 200:
+            body = response.json()
+            pagamento = Pagamento.objects.get(pagamento_id=body['collection']['id'])
+            pagamento.status = body['collection']['status']
+            pagamento.save()
+            return True
+        else:
+            return False
+    except requests.exceptions.RequestException as e:
+        return True
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class WebHook(View):
+
+    def post(self, request, *args, **kwargs):
+        body = json.loads(self.request.body.decode())
+
+        mensagem = str(body['resource'])
+        teste = Teste(mensagem=mensagem)
+        teste.save()
+
+        pagamento = lerWebook(body['resource'])
+
+        cobranca_id = str(body['resource']).replace('https://api.mercadolibre.com/collections/notifications/', '')
+
+        if pagamento:
+            cobranca = Cobranca(id_web=cobranca_id, mensagem='Cobrada com sucesso')
+            cobranca.save()
+        else:
+            cobranca = Cobranca(id_web=cobranca_id, mensagem='Erro ao processar cobrança')
+            cobranca.save()
+
+        return HttpResponse(status=200)

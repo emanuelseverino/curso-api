@@ -7,7 +7,7 @@ from drf_yasg import openapi
 from rest_framework.permissions import AllowAny
 
 from core.views import robots
-from hook.views import WebHookView
+from hook.views import WebHookView, WebHook
 from usuario.api.viewsets import CustomAuthToken, ChangePasswordView
 
 schema_view = get_schema_view(
@@ -35,7 +35,7 @@ urlpatterns = [
     path('hook/', include('hook.urls'), ),
     path('contas/', include("django.contrib.auth.urls")),
     path('robots.txt', robots, ),
-    path('webhook2/', WebHookView.as_view(), name='webhook', ),
+    path('webhook2/', WebHook.as_view(), name='webhook', ),
 ]
 
 urlpatterns += [
