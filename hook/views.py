@@ -184,7 +184,7 @@ class WebHook(View):
         usuario = buscarUsuario(self.request.user)
 
         mensagem = str(body['resource'])
-        teste = Teste(usuario=usuario.email,mensagem=mensagem)
+        teste = Teste(usuario=self.request.user, mensagem=mensagem)
         teste.save()
 
         pagamento = lerWebook(body['resource'])

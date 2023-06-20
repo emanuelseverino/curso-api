@@ -47,7 +47,7 @@ class Teste(models.Model):
     mensagem = models.CharField(max_length=10000)
 
     def __str__(self):
-        return '%s - %s' % (self.pk, self.mensagem)
+        return '%s - %s' % (self.usuario, self.mensagem)
 
 
 class Cobranca(models.Model):
