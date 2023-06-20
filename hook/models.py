@@ -55,4 +55,4 @@ class Pagamento(models.Model):
     status = models.CharField(choices=STATUS_CHOICES, max_length=20)
 
     def __str__(self):
-        return '%s - %s' % (self.usuario, self.pagamento)
+        return '%s - %s' % (self.usuario, self.cobranca)
