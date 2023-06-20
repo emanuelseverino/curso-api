@@ -1,7 +1,9 @@
 import os
 import datetime
 
+import pytz
 from django.http import HttpResponse
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
@@ -20,8 +22,8 @@ class PainelView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # Adicione dados adicionais ao contexto, se necessário
-        print(datetime.datetime.today() > self.request.user.vencimento)
-        context['data_atual'] = datetime.datetime.now()
+        print(timezone.now() > self.request.user.vencimento)
+        context['data_atual'] = timezone.now()
         context['data_vencimento'] = self.request.user.vencimento
         return context
 

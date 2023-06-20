@@ -2,12 +2,13 @@
 {% block content %}
 {% include 'navbar.html' %}
 <div class="container">
-  <h1>Painel de Controle</h1>
-  <p>Olá, {{ user.get_full_name }}!</p>
-  {% if data_atual > data_vencimento %}
-  <p>O seu plano vencerá em <strong>{{ user.vencimento|date }}</strong>.</p>
-  {% else %}
-   <p>O seu plano venceu em <strong>{{ user.vencimento|date }}</strong>.</p>
-  {% endif %}
+    <h1>Painel de Controle</h1>
+    <p>Olá, {{ user.get_full_name }}!</p>
+    {% if data_vencimento > data_atual %}
+    <p>O seu plano vencerá em <strong>{{ user.vencimento|date }}</strong>.</p>
+    {% else %}
+    <p>O seu plano venceu dia <strong>{{ user.vencimento|date }}</strong>.</p>
+    <a href="{% url 'pagar' %}" class="btn btn-success">Atualizar plano</a>
+    {% endif %}
 </div>
 {% endblock %}

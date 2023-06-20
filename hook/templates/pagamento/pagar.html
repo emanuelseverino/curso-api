@@ -1,14 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Pagar</title>
-</head>
-<body>
-<form method="post">
-    {% csrf_token %}
-    <!-- Resto dos campos do formulário -->
-    <input type="submit" value="Pagar">
-</form>
-</body>
-</html>
+{% extends 'base.html'  %}
+{% block content %}
+{% include 'navbar.html' %}
+<div class="container">
+    <p class="h1">Atualizar plano</p>
+    <p>Será gerado um QRCode no valor de <strong>R$19,90</strong>. Assim que o pagamento for confirmado, seu plano será automaticamente atualizado.</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="col-md-3 mb-2">
+            <label class="form-label">CPF</label>
+            <input required type="text" name="cpf" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Gerar QRCode</button>
+    </form>
+</div>
+{% endblock %}

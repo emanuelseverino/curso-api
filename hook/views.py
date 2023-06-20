@@ -28,12 +28,12 @@ class PagarView(LoginRequiredMixin, View):
             "description": "Testando a API",
             "payment_method_id": "pix",
             "payer": {
-                "email": "emanueldesouza@hotmail.com",
-                "first_name": "Emanuel",
-                "last_name": "Severino",
+                "email": self.request.user.email,
+                "first_name": self.request.user.first_name,
+                "last_name": self.request.user.last_name,
                 "identification": {
                     "type": "CPF",
-                    "number": "12571773704"
+                    "number": self.request.POST.get('cpf').replace('.','').replace('-','')
                 },
                 "address": {
                     "zip_code": "28300000",
@@ -69,7 +69,9 @@ class PagarView(LoginRequiredMixin, View):
                 pagamento = Pagamento.objects.get(id=cob.pk)
                 if pagamento:
                     context = {
-                        'pagamento': pagamento
+                        'pagamento': pagamento,
+                        'usuario': self.request.user,
+                        'cpf': self.request.POST.get('cpf').replace('.','').replace('-','')
                     }
                     pagamento.save()
                     return render(request, 'pagamento/sucesso.html', context=context)
