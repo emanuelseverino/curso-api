@@ -43,8 +43,8 @@ class MercadoPago(models.Model):
 
 
 class Teste(models.Model):
+    usuario = models.CharField(max_length=100, blank=True, null=True)
     mensagem = models.CharField(max_length=10000)
-    criado_em = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
     def __str__(self):
         return '%s - %s' % (self.pk, self.mensagem)
