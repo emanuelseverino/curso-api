@@ -97,7 +97,7 @@ class WebHookView(View):
 
     def post(self, request, *args, **kwargs):
         body = json.loads(self.request.body.decode('utf-8'))
-        teste = Teste(mensagem=str(type(body)))
+        teste = Teste(mensagem=body['id'])
         teste.save()
 
         mercado_page_test = MercadoPago(
