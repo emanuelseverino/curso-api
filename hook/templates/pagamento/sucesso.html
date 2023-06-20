@@ -9,7 +9,7 @@
         <img class="col" width="300" height="300" src="data:image/jpeg;base64,{{pagamento.qr_code64}}" alt="">
         <div class="col-xs-12 col-sm-12 mb-2">
             <label class="form-label">Copia e cola</label>
-            <input disabled class="form-control" type="text" value="{{ pagamento.url }}"/>
+            <input disabled class="form-control" type="text" value="{{ pagamento.qr_code }}"/>
         </div>
     </div>
 </div>
