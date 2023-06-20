@@ -100,6 +100,41 @@
     {% endblock %}
 </head>
 <body>
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+            <a href="{% url 'index' %}">
+                <img src="{% static 'img/logo-p.png' %}" alt="Logo" height="32">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
+                    {% if user.is_superuser %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin">Administração</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="btn btn-sm btn-secondary" href="{% url 'painel' %}">Plano</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Sair</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Entrar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'cadastro-usuario' %}">Criar Conta</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+    </div>
+</nav>
 <div style="min-height: calc(100vh - 70px);">
 {% block content %}
 {% endblock %}
