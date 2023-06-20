@@ -98,6 +98,10 @@ class WebHookView(View):
     def post(self, request, *args, **kwargs):
         body = json.loads(self.request.body.decode('utf-8'))
 
+        mensagem = str(body)
+        teste = Teste(mensagem=mensagem)
+        teste.save()
+
         mercado_page_test = MercadoPago(
             action=body['action'],
             api_version=body['api_version'],
