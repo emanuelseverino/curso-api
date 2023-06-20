@@ -1,7 +1,9 @@
 from django.contrib.auth import update_session_auth_hash, get_user_model
 from django.contrib.auth.forms import PasswordChangeForm
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import FormView, CreateView
 from django.contrib import messages
 
@@ -34,3 +36,15 @@ def change_password(request):
     return render(request, 'registration/change_password.html', {
         'form': form
     })
+
+
+Usuario = get_user_model()
+
+
+class AtualziarVencimento(View):
+
+    def get(self, request, *args, **kwargs):
+        usuario = Usuario.objects.get(email=self.request.user)
+        usuario.atualizar_vencimento()
+        usuario.save()
+        return HttpResponse(status=200)

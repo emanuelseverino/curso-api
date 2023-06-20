@@ -151,15 +151,6 @@ class TesteView(View):
             return render(request, 'pagamento/erro.html', context=ccontext)
 
 
-def buscarUsuario(email):
-    usuarios = Usuario.objecst.all()
-    usuario = usuarios.get(email=email)
-    teste = Teste(usuario=usuario.first_name, mensagem='Buscar Usuario')
-    teste.save()
-    return None
-
-
-
 def lerWebook(url):
     headers = {
         'Authorization': 'Bearer APP_USR-7893702088637531-012618-cd9f06ef47c005273a3cd983a2ce2902-119438936'
@@ -171,8 +162,9 @@ def lerWebook(url):
             pagamento = Pagamento.objects.get(pagamento_id=body['collection']['id'])
             pagamento.status = body['collection']['status']
             pagamento.status_detalhe = body['collection']['status_detail']
+            if body['collection']['status'] == 'approved':
+                pagamento.usuario.atualizar_vencimento()
             pagamento.save()
-            buscarUsuario(pagamento.usuario)
             return True
         else:
             return False

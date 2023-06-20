@@ -42,6 +42,10 @@ class CustomUsuario(AbstractUser):
     vencimento = models.DateTimeField(default=datetime.datetime.now)
     visivel = models.BooleanField(default=True)
 
+    def atualizar_vencimento(self):
+        self.vencimento = datetime.datetime.now() + datetime.timedelta(days=31)
+        self.save()
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name', ]
 

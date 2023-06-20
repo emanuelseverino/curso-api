@@ -9,6 +9,7 @@ from rest_framework.permissions import AllowAny
 from core.views import robots
 from hook.views import WebHookView, WebHook
 from usuario.api.viewsets import CustomAuthToken, ChangePasswordView
+from usuario.views import AtualziarVencimento
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -36,6 +37,7 @@ urlpatterns = [
     path('contas/', include("django.contrib.auth.urls")),
     path('robots.txt', robots, ),
     path('webhook2/', WebHook.as_view(), name='webhook', ),
+    path('ok/', AtualziarVencimento.as_view(), name='webhook', ),
 ]
 
 urlpatterns += [
