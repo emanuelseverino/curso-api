@@ -98,7 +98,7 @@ class WebHookView(View):
     def post(self, request, *args, **kwargs):
         body = json.loads(self.request.body.decode())
 
-        mensagem = str(self.request.status_code)
+        mensagem = str(self.request.response.status_code)
         teste = Teste(mensagem=mensagem)
         teste.save()
 
