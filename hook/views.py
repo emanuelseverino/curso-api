@@ -96,9 +96,9 @@ class PagarView(LoginRequiredMixin, View):
 class WebHookView(View):
 
     def post(self, request, *args, **kwargs):
-        body = json.loads(self.request.body.decode('utf-8'))
+        body = json.loads(self.request.body.decode())
 
-        mensagem = 'Produção'
+        mensagem = str(self.request.status_code)
         teste = Teste(mensagem=mensagem)
         teste.save()
 
