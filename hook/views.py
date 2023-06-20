@@ -51,7 +51,7 @@ class PagarView(LoginRequiredMixin, View):
         data = json.loads(response.content)
 
         if response.status_code == 201:
-            cob = Cobranca.objects.create(
+            cob = Pagamento.objects.create(
                 usuario=self.request.user,
                 pagamento_id=data['id'], status=data['status'],
                 status_detalhe=data['status_detail'],
@@ -63,12 +63,10 @@ class PagarView(LoginRequiredMixin, View):
                 url=data['point_of_interaction']['transaction_data']['ticket_url'])
             if cob:
                 cob.save()
-                obj_cobranca = Cobranca.objects.get(id=cob.pk)
-                print('2 %s' % type(obj_cobranca.id))
-                pagamento = Pagamento(usuario=self.request.user, cobranca=obj_cobranca, status=cob.status)
+                pagamento = Pagamento.objects.get(id=cob.pk)
                 if pagamento:
                     context = {
-                        'pagamento': pagamento.cobranca
+                        'pagamento': pagamento
                     }
                     pagamento.save()
                     return render(request, 'pagamento/sucesso.html', context=context)
