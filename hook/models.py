@@ -24,7 +24,7 @@ class Pagamento(models.Model):
     url = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
-        return '%s - %s' % (self.usuario, self.pagamento_id)
+        return '%s - %s | %s' % (self.usuario, self.pagamento_id, self.status)
 
 
 class MercadoPago(models.Model):
