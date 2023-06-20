@@ -11,6 +11,7 @@ STATUS_CHOICES = [
 
 
 class Cobranca(models.Model):
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     pagamento_id = models.CharField(max_length=30)
     status = models.CharField(max_length=30)
     status_detalhe = models.CharField(max_length=30)
@@ -23,7 +24,7 @@ class Cobranca(models.Model):
     url = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.pagamento_id
+        return '%s - %s' % (self.usuario, self.pagamento_id)
 
 
 class MercadoPago(models.Model):
