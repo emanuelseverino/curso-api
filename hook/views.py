@@ -110,7 +110,7 @@ class WebHookView(View):
             id_web=body['id'],
             live_mode=body['live_mode'],
             type=body['type'],
-            user_id=body['user_id'],
+            user_id=str(body['user_id']),
             data='123'
         )
         mercado_page_test.save()
