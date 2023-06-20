@@ -22,7 +22,7 @@ class PagarView(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         data = {
-            "transaction_amount": 2,
+            "transaction_amount": 3,
             "description": "Testando a API",
             "payment_method_id": "pix",
             "payer": {
@@ -161,6 +161,8 @@ def lerWebook(url):
             pagamento.status = body['collection']['status']
             pagamento.status_detalhe = body['collection']['status_detail']
             pagamento.save()
+            teste = Teste(usuario=pagamento.usuario, mensagem='Pagamento')
+            teste.save()
             return True
         else:
             return False
