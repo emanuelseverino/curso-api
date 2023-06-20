@@ -22,7 +22,7 @@ class PagarView(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         data = {
-            "transaction_amount": 2,
+            "transaction_amount": 3,
             "description": "Testando a API",
             "payment_method_id": "pix",
             "payer": {
@@ -160,6 +160,7 @@ def lerWebook(url):
             pagamento = Pagamento.objects.get(pagamento_id=body['collection']['id'])
             pagamento.status = body['collection']['status']
             pagamento.status_detalhe = body['collection']['status_detail']
+            pagamento.usuario.vencimento = datetime.datetime.now() + datetime.timedelta(days=31)
             pagamento.save()
             return True
         else:
