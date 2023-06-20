@@ -13,6 +13,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 from hook.models import Cobranca, Pagamento, MercadoPago, Teste
 
+Usuario = get_user_model()
+
 
 class PagarView(LoginRequiredMixin, View):
     login_url = '/contas/login'
@@ -22,7 +24,7 @@ class PagarView(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         data = {
-            "transaction_amount": 1,
+            "transaction_amount": 2,
             "description": "Testando a API",
             "payment_method_id": "pix",
             "payer": {
@@ -149,6 +151,13 @@ class TesteView(View):
             return render(request, 'pagamento/erro.html', context=ccontext)
 
 
+def buscarUsuario(email):
+    usuario = Usuario.objecst.get(email=email)
+    teste = Teste(usuario=usuario.first_name, mensagem='Buscar Usuario')
+    teste.save()
+
+
+
 def lerWebook(url):
     headers = {
         'Authorization': 'Bearer APP_USR-7893702088637531-012618-cd9f06ef47c005273a3cd983a2ce2902-119438936'
@@ -161,8 +170,7 @@ def lerWebook(url):
             pagamento.status = body['collection']['status']
             pagamento.status_detalhe = body['collection']['status_detail']
             pagamento.save()
-            teste = Teste(usuario=pagamento.usuario.email, mensagem='Pagamento')
-            teste.save()
+            buscarUsuario(pagamento.usuario.email)
             return True
         else:
             return False
