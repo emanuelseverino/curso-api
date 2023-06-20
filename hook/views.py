@@ -22,7 +22,7 @@ class PagarView(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         data = {
-            "transaction_amount": 1,
+            "transaction_amount": 2,
             "description": "Testando a API",
             "payment_method_id": "pix",
             "payer": {
@@ -168,21 +168,11 @@ def lerWebook(url):
         return True
 
 
-Usuario = get_user_model()
-
-
-def buscarUsuario(usuario):
-    return Usuario.objects.get(email=usuario.email)
-
-
 @method_decorator(csrf_exempt, name='dispatch')
 class WebHook(View):
 
     def post(self, request, *args, **kwargs):
         body = json.loads(self.request.body.decode())
-
-        usuario = buscarUsuario(self.request.user)
-
         mensagem = str(body['resource'])
         teste = Teste(usuario=self.request.user, mensagem=mensagem)
         teste.save()
