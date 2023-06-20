@@ -158,6 +158,7 @@ def lerWebook(url):
             body = response.json()
             pagamento = Pagamento.objects.get(pagamento_id=body['collection']['id'])
             pagamento.status = body['collection']['status']
+            pagamento.status_detalhe = body['collection']['status_detail']
             pagamento.save()
             return True
         else:
