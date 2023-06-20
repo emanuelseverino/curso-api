@@ -24,7 +24,7 @@ class PagarView(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         data = {
-            "transaction_amount": 2,
+            "transaction_amount": 1,
             "description": "Testando a API",
             "payment_method_id": "pix",
             "payer": {
@@ -152,9 +152,11 @@ class TesteView(View):
 
 
 def buscarUsuario(email):
-    usuario = Usuario.objecst.get(email=email)
+    usuarios = Usuario.objecst.all()
+    usuario = usuarios.get(email=email)
     teste = Teste(usuario=usuario.first_name, mensagem='Buscar Usuario')
     teste.save()
+    return None
 
 
 
@@ -170,7 +172,7 @@ def lerWebook(url):
             pagamento.status = body['collection']['status']
             pagamento.status_detalhe = body['collection']['status_detail']
             pagamento.save()
-            buscarUsuario(pagamento.usuario.email)
+            buscarUsuario(pagamento.usuario)
             return True
         else:
             return False
