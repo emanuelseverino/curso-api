@@ -8,7 +8,7 @@
     <p>O seu plano vencerá em <strong>{{ user.vencimento|date }}</strong>.</p>
     {% else %}
     <p>O seu plano venceu dia <strong>{{ user.vencimento|date }}</strong>.</p>
-    <a href="{% url 'pagar' %}" class="btn btn-success">Atualizar plano</a>
+    <a href="{% url 'pagar' %}" class="btn btn-success">Pagar plano</a>
     {% endif %}
 </div>
 {% endblock %}

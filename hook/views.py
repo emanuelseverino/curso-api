@@ -33,7 +33,7 @@ class PagarView(LoginRequiredMixin, View):
                 "last_name": self.request.user.last_name,
                 "identification": {
                     "type": "CPF",
-                    "number": self.request.POST.get('cpf').replace('.','').replace('-','')
+                    "number": self.request.POST.get('cpf').replace('.', '').replace('-', '')
                 },
                 "address": {
                     "zip_code": "28300000",
@@ -71,7 +71,7 @@ class PagarView(LoginRequiredMixin, View):
                     context = {
                         'pagamento': pagamento,
                         'usuario': self.request.user,
-                        'cpf': self.request.POST.get('cpf').replace('.','').replace('-','')
+                        'cpf': self.request.POST.get('cpf').replace('.', '').replace('-', '')
                     }
                     pagamento.save()
                     return render(request, 'pagamento/sucesso.html', context=context)
@@ -180,8 +180,6 @@ class WebHook(View):
     def post(self, request, *args, **kwargs):
         body = json.loads(self.request.body.decode())
         mensagem = str(body['resource'])
-        teste = Teste(usuario=self.request.user, mensagem=mensagem)
-        teste.save()
 
         pagamento = lerWebook(body['resource'])
 
