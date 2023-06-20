@@ -4,7 +4,7 @@
 <form method="POST" class="">
     {% csrf_token %}
     <h1 class="pb-3">Criar uma conta</h1>
-   <div class="row g-2">
+    <div class="row g-2">
         <div class="col">
             <input required autofocus name="first_name" class="form-control mb-2 p-3" type="text" placeholder="Nome">
         </div>
@@ -42,7 +42,4 @@
         <button type="submit" class="btn btn-dark p-3">Cadastrar</button>
     </div>
 </form>
-{% endblock %}
-{% block image %}
-imagem
 {% endblock %}
