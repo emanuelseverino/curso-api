@@ -98,22 +98,22 @@ class WebHookView(View):
     def post(self, request, *args, **kwargs):
         body = json.loads(self.request.body.decode('utf-8'))
 
-        mensagem = str(body)
+        mensagem = 'Produção'
         teste = Teste(mensagem=mensagem)
         teste.save()
 
-        mercado_page_test = MercadoPago(
-            action=body['action'],
-            api_version=body['api_version'],
-            application_id=body['application_id'],
-            date_created=body['date_created'],
-            id_web=body['id'],
-            live_mode=body['live_mode'],
-            type=body['type'],
-            user_id=str(body['user_id']),
-            data='123'
-        )
-        mercado_page_test.save()
+        # mercado_page_test = MercadoPago(
+        #     action=body['action'],
+        #     api_version=body['api_version'],
+        #     application_id=body['application_id'],
+        #     date_created=body['date_created'],
+        #     id_web=body['id'],
+        #     live_mode=body['live_mode'],
+        #     type=body['type'],
+        #     user_id=str(body['user_id']),
+        #     data='123'
+        # )
+        # mercado_page_test.save()
         return HttpResponse(status=200)
 
 
