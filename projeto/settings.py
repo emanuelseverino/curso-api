@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'usuario',
     'perfil',
     'hook',
+    'pessoa',
 ]
 
 MIDDLEWARE = [
@@ -92,7 +93,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'usuario.CustomUsuario'
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'painel'
 
 LOGOUT_REDIRECT_URL = 'login'
 

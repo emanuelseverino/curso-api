@@ -25,7 +25,7 @@ class PagarView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         data = {
             "transaction_amount": 1,
-            "description": "Testando a API",
+            "description": "Renovação de Plano - EstudeAPI",
             "payment_method_id": "pix",
             "payer": {
                 "email": self.request.user.email,

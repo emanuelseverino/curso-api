@@ -33,6 +33,7 @@ urlpatterns = [
     path('resetar-senha/', include('django_rest_passwordreset.urls', namespace='resetar_senha')),
     path('usuario/', include('usuario.urls'), ),
     path('perfil/', include('perfil.urls'), ),
+    path('pessoa/', include('pessoa.urls'), ),
     path('hook/', include('hook.urls'), ),
     path('contas/', include("django.contrib.auth.urls")),
     path('robots.txt', robots, ),
