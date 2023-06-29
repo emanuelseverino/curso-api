@@ -1,4 +1,4 @@
-import datetime
+from datetime import timezone, datetime, timedelta
 
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
@@ -35,12 +35,16 @@ class UsuarioMaganer(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 
+def menos_um_dia():
+    return datetime.now(timezone.utc) - timedelta(days=1)
+
+
 class CustomUsuario(AbstractUser):
     foto = models.ImageField(upload_to='usuarios', blank=True, null=True)
     email = models.EmailField('e-mail', unique=True)
     celular = models.CharField('celular', max_length=17, unique=True, blank=True, null=True)
     # vencimento = models.DateTimeField(default=datetime.datetime.now)
-    vencimento = models.DateTimeField(blank=True, null=True)
+    vencimento = models.DateTimeField(default=menos_um_dia)
     visivel = models.BooleanField(default=True)
 
     def atualizar_vencimento(self):
@@ -52,7 +56,6 @@ class CustomUsuario(AbstractUser):
 
     def __str__(self):
         return self.email
-
 
     class Meta:
         verbose_name = 'Usuário'

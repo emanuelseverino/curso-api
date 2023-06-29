@@ -41,7 +41,7 @@ def change_password(request):
 Usuario = get_user_model()
 
 
-class AtualziarVencimento(View):
+class AtualizarVencimento(View):
 
     def get(self, request, *args, **kwargs):
         usuario = Usuario.objects.get(email=self.request.user)
