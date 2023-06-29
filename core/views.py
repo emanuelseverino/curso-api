@@ -21,8 +21,6 @@ class PainelView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Adicione dados adicionais ao contexto, se necessário
-        print(timezone.now() > self.request.user.vencimento)
         context['data_atual'] = timezone.now()
         context['data_vencimento'] = self.request.user.vencimento
         return context

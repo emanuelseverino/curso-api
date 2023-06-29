@@ -43,7 +43,6 @@ class CustomUsuario(AbstractUser):
     foto = models.ImageField(upload_to='usuarios', blank=True, null=True)
     email = models.EmailField('e-mail', unique=True)
     celular = models.CharField('celular', max_length=17, unique=True, blank=True, null=True)
-    # vencimento = models.DateTimeField(default=datetime.datetime.now)
     vencimento = models.DateTimeField(default=menos_um_dia)
     visivel = models.BooleanField(default=True)
 
