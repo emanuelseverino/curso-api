@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from pessoa.api.serializers import PessoaSerializer
 from pessoa.models import Pessoa
+from projeto.premissions import VencimentoPermission
 
 Usuario = get_user_model()
 
@@ -11,7 +12,7 @@ Usuario = get_user_model()
 class PessoaViewSet(ModelViewSet):
     queryset = Pessoa.objects.all()
     serializer_class = PessoaSerializer
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [IsAuthenticated, VencimentoPermission]
     authentication_classes = [TokenAuthentication, ]
 
     def get_queryset(self):

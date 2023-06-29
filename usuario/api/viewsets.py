@@ -6,11 +6,10 @@ from rest_framework.generics import UpdateAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
-from rest_framework import serializers
-from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_200_OK
-from rest_framework.views import APIView
+from rest_framework.status import HTTP_400_BAD_REQUEST
 
-from usuario.api.serializers import CustomAuthTokenSerializer, MudarSenhaSerializer, ChangePasswordSerializer
+from projeto.premissions import VencimentoPermission
+from usuario.api.serializers import CustomAuthTokenSerializer, ChangePasswordSerializer
 
 
 class CustomAuthToken(ObtainAuthToken):
@@ -37,7 +36,7 @@ class ChangePasswordView(UpdateAPIView):
     """
     serializer_class = ChangePasswordSerializer
     model = Usuario
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, VencimentoPermission)
     authentication_classes = (TokenAuthentication,)
 
     def get_object(self, queryset=None):

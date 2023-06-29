@@ -6,6 +6,7 @@ from rest_framework.viewsets import ModelViewSet, GenericViewSet, ReadOnlyModelV
 
 from perfil.api.serializers import PerfilSerializer, RedeSocialSerializer, LocalizacaoSerializer, EnderecoSerializer
 from perfil.models import Endereco, Localizacao, RedeSocial
+from projeto.premissions import VencimentoPermission
 
 Usuario = get_user_model()
 
@@ -13,7 +14,7 @@ Usuario = get_user_model()
 class PerfilViewSet(GenericViewSet, RetrieveModelMixin, UpdateModelMixin):
     queryset = Usuario.objects.all()
     serializer_class = PerfilSerializer
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [IsAuthenticated, VencimentoPermission]
     authentication_classes = [TokenAuthentication, ]
 
     def get_object(self):
@@ -23,7 +24,7 @@ class PerfilViewSet(GenericViewSet, RetrieveModelMixin, UpdateModelMixin):
 class RedeSocialViewSet(GenericViewSet, RetrieveModelMixin, UpdateModelMixin):
     queryset = RedeSocial.objects.all()
     serializer_class = RedeSocialSerializer
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [IsAuthenticated, VencimentoPermission]
     authentication_classes = [TokenAuthentication, ]
 
     def get_object(self):
@@ -33,7 +34,7 @@ class RedeSocialViewSet(GenericViewSet, RetrieveModelMixin, UpdateModelMixin):
 class EnderecoViewSet(ModelViewSet):
     queryset = Endereco.objects.all()
     serializer_class = EnderecoSerializer
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [IsAuthenticated, VencimentoPermission]
     authentication_classes = [TokenAuthentication, ]
 
     def get_queryset(self):
@@ -43,7 +44,7 @@ class EnderecoViewSet(ModelViewSet):
 class LocalizacaoViewSet(GenericViewSet, RetrieveModelMixin, UpdateModelMixin):
     queryset = Localizacao.objects.all()
     serializer_class = LocalizacaoSerializer
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [IsAuthenticated, VencimentoPermission]
     authentication_classes = [TokenAuthentication, ]
 
     def get_object(self):
@@ -53,5 +54,5 @@ class LocalizacaoViewSet(GenericViewSet, RetrieveModelMixin, UpdateModelMixin):
 class PerfilTesteViewSet(ReadOnlyModelViewSet):
     queryset = Usuario.objects.all()
     serializer_class = PerfilSerializer
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [IsAuthenticated, VencimentoPermission]
     authentication_classes = [TokenAuthentication, ]
